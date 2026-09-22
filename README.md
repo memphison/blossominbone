@@ -197,3 +197,19 @@ so please keep it free of anything personal to that account (no
 personal access tokens, no unrelated project references, no comments
 assuming a specific maintainer). Everything in it should read as
 belonging to Blossomin' Bone, not to whoever set it up.
+
+**Pushing this local repo to GitHub for the first time:**
+
+```bash
+# on github.com: create a new PRIVATE repo named "blossominbone" — leave it
+# empty (no README/license/gitignore, this repo already has all three)
+
+git remote add origin https://github.com/<your-username>/blossominbone.git
+git branch -M main
+git push -u origin main
+```
+
+**Connecting Vercel:** on vercel.com, "Add New… → Project", import the
+`blossominbone` GitHub repo, leave every build setting on its default
+(Next.js is auto-detected), and deploy. No environment variables are
+required for the current feature set.
