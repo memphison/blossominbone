@@ -5,6 +5,7 @@ import SectionIntro from "../ui/SectionIntro";
 import Floret from "../ui/Floret";
 import Placeholder from "../ui/Placeholder";
 import { products } from "@/content/products";
+import { florets } from "@/content/florets";
 import { externalLinkProps } from "@/lib/externalLinkProps";
 import styles from "./Merch.module.css";
 
@@ -38,7 +39,7 @@ export default function Merch() {
           ))}
         </div>
 
-        <Floret src="/images/flower-star.webp" width={300} height={258} align="left" />
+        <Floret {...florets.merch} />
       </Container>
     </section>
   );

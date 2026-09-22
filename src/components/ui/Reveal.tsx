@@ -1,19 +1,27 @@
 "use client";
 
-import { useEffect, useRef, type ElementType, type ReactNode } from "react";
+import { useEffect, useRef, type CSSProperties, type ElementType, type ReactNode } from "react";
 import styles from "./Reveal.module.css";
 
 interface RevealProps {
   as?: ElementType;
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
   /** Use the slight-rotate variant for hand-drawn art. */
   art?: boolean;
   /** Stagger multiple Reveal siblings, e.g. 0, 90, 180. */
   delayMs?: number;
 }
 
-export default function Reveal({ as: Tag = "div", children, className, art = false, delayMs = 0 }: RevealProps) {
+export default function Reveal({
+  as: Tag = "div",
+  children,
+  className,
+  style,
+  art = false,
+  delayMs = 0,
+}: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -35,8 +43,10 @@ export default function Reveal({ as: Tag = "div", children, className, art = fal
 
   const classes = [styles.bloom, art ? styles.art : "", className].filter(Boolean).join(" ");
 
+  const mergedStyle = delayMs ? { ...style, transitionDelay: `${delayMs}ms` } : style;
+
   return (
-    <Tag ref={ref} className={classes} style={delayMs ? { transitionDelay: `${delayMs}ms` } : undefined}>
+    <Tag ref={ref} className={classes} style={mergedStyle}>
       {children}
     </Tag>
   );

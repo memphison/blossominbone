@@ -42,7 +42,7 @@ export default function RoadStories() {
           ))}
         </div>
 
-        <Floret src="/images/skull-cat.webp" width={700} height={732} align="right" />
+        <Floret src="/images/skull-cat.webp" alt="" width={700} height={732} align="right" />
       </Container>
     </section>
   );

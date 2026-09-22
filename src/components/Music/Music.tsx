@@ -4,6 +4,7 @@ import Reveal from "../ui/Reveal";
 import SectionIntro from "../ui/SectionIntro";
 import Floret from "../ui/Floret";
 import { album } from "@/content/album";
+import { florets } from "@/content/florets";
 import { externalLinkProps } from "@/lib/externalLinkProps";
 import styles from "./Music.module.css";
 
@@ -100,7 +101,7 @@ export default function Music() {
           ))}
         </Reveal>
 
-        <Floret src="/images/flower-white.webp" width={340} height={412} align="right" />
+        <Floret {...florets.music} />
       </Container>
     </section>
   );

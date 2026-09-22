@@ -5,6 +5,7 @@ import Floret from "../ui/Floret";
 import MailingListSignup from "../MailingListSignup/MailingListSignup";
 import { shows } from "@/content/shows";
 import { site } from "@/content/site";
+import { florets } from "@/content/florets";
 import { externalLinkProps } from "@/lib/externalLinkProps";
 import styles from "./Tour.module.css";
 
@@ -50,7 +51,7 @@ export default function Tour() {
 
         <MailingListSignup className={styles.signup} />
 
-        <Floret src="/images/flower-magnolia.webp" width={281} height={239} align="left" />
+        <Floret {...florets.tour} />
       </Container>
     </section>
   );
