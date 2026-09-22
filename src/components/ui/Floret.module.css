@@ -1,0 +1,26 @@
+.slotLeft,
+.slotRight {
+  display: flex;
+  margin-top: clamp(56px, 9vw, 120px);
+}
+.slotLeft {
+  justify-content: flex-start;
+}
+.slotRight {
+  justify-content: flex-end;
+}
+
+.floret {
+  width: clamp(90px, 12vw, 170px);
+  opacity: 0.95;
+}
+.floret img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 700px) {
+  .floret {
+    width: 34vw;
+  }
+}

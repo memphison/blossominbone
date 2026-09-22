@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blossomin' Bone — Brantley County, Georgia</title>
+<link rel="icon" href="/images/birddog.webp" type="image/webp">
+<meta name="description" content="Blossomin' Bone. Ayron Moleen and Joshua &quot;Hollering Bob&quot; Tison. Bird Dog, out now on Snake Piss Records.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=League+Gothic&family=Walter+Turncoat&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================================================
+   BLOSSOMIN' BONE — prototype
+   Design system. Every value here becomes a token when this
+   moves to Next.js.
+   =========================================================== */
+:root{
+  color-scheme: light;
+
+  /* colour */
+  --paper:#f4f3ed;
+  --ink:#11110f;
+  --leaf:#263126;
+  --muted-leaf:#465044;
+  --wine:#883d4d;
+  --flower-red:#a84a59;
+  --hydrangea-blue:#6686a4;
+  --lavender:#76617d;
+  --bone:#dedbd0;
+  --accent-red:#d84b45;
+  --rule:#d5d2c6;
+
+  /* type */
+  --hand:'Walter Turncoat', cursive;
+  --condensed:'League Gothic', 'Arial Narrow', sans-serif;
+  --body:'Barlow', system-ui, sans-serif;
+
+  /* rhythm */
+  --gutter:clamp(20px, 5vw, 64px);
+  --section:clamp(96px, 15vh, 190px);
+  --measure:62ch;
+
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top, 0px);
+  padding-bottom:env(safe-area-inset-bottom, 0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:96px}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-size:17.5px; line-height:1.66; font-weight:400;
+  overflow-x:hidden;
+}
+img{display:block; max-width:100%; height:auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent-red); outline-offset:4px}
+
+.wrap{width:100%; max-width:1240px; margin:0 auto; padding-left:var(--gutter); padding-right:var(--gutter)}
+section{position:relative}
+
+/* ---------- type voices ---------- */
+.label{
+  font-family:var(--condensed); font-size:15px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--muted-leaf);
+}
+.hand{font-family:var(--hand); font-weight:400; line-height:1.18}
+h2.hand{font-size:clamp(34px, 6vw, 60px); margin:0 0 .5em; max-width:16ch}
+h3.hand{font-size:clamp(24px, 3.4vw, 34px); margin:0 0 .35em}
+p{margin:0 0 1.15em}
+.about-copy p,.entry p,.tour-note,.panel p{max-width:var(--measure)}
+.lede{font-size:clamp(19px, 2.2vw, 23px); line-height:1.55; font-weight:400}
+
+/* section opener: tiny printed label with a rule, like the sleeve credits */
+.opener{display:flex; align-items:center; gap:16px; margin-bottom:clamp(28px,5vw,54px)}
+.opener::after{content:""; flex:1; height:1px; background:var(--rule)}
+
+/* ---------- header ---------- */
+header{
+  position:sticky; top:0; z-index:50; background:var(--paper);
+  padding-top:env(safe-area-inset-top,0px);
+  border-bottom:1px solid transparent; transition:border-color .25s ease;
+}
+header.stuck{border-bottom-color:var(--rule)}
+.bar{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:14px 0}
+.bar .home{font-family:var(--condensed); font-size:19px; letter-spacing:.18em; text-transform:uppercase; text-decoration:none; opacity:0; transition:opacity .3s ease}
+header.stuck .bar .home{opacity:1}
+
+nav ul{display:flex; gap:6px; list-style:none; margin:0; padding:0}
+nav a{
+  display:block; font-family:var(--condensed); font-size:17px; letter-spacing:.2em;
+  text-transform:uppercase; text-decoration:none; color:var(--ink);
+  padding:5px 11px; border:1px solid transparent;
+}
+nav a:hover{border-color:var(--ink)}           /* little printed label */
+nav a:hover{color:var(--accent-red); border-color:var(--accent-red)}
+
+.menu-btn{display:none; font-family:var(--condensed); font-size:18px; letter-spacing:.2em;
+  text-transform:uppercase; background:none; border:1px solid var(--ink); padding:6px 14px; cursor:pointer}
+
+/* ---------- hero ---------- */
+#hero{min-height:calc(100svh - 70px); display:flex; align-items:center; overflow:hidden}
+.hero-inner{width:100%; text-align:center; padding:clamp(30px,7vh,90px) 0 clamp(50px,9vh,110px); position:relative; z-index:2}
+
+/* ASSET: BLOSSOMIN' BONE hand lettering. Replace with transparent PNG/SVG
+   traced from the Bird Dog front cover — do NOT substitute a font. */
+.logo{width:min(880px, 88vw); margin:0 auto}
+
+.origin{margin:clamp(16px,2.4vw,26px) 0 0; font-family:var(--condensed);
+  font-size:clamp(17px,2.2vw,24px); letter-spacing:.32em; text-transform:uppercase; color:var(--muted-leaf)}
+
+/* ASSET: isolated Bird Dog drawing, transparent PNG */
+.birddog{width:min(330px, 52vw); margin:clamp(26px,5vh,54px) auto 0; transform:rotate(-1.2deg)}
+
+.hero-actions{display:flex; flex-wrap:wrap; gap:clamp(18px,4vw,44px); justify-content:center;
+  margin-top:clamp(34px,6vh,66px)}
+.action{
+  font-family:var(--condensed); font-size:clamp(17px,2vw,21px); letter-spacing:.2em;
+  text-transform:uppercase; text-decoration:none; padding-bottom:5px;
+  border-bottom:1.5px solid var(--ink); transition:color .2s, border-color .2s;
+}
+.action:hover{color:var(--accent-red); border-bottom-color:var(--accent-red)}
+
+/* botanical intrusions — one per screen, never a border */
+.intrude{position:absolute; z-index:1; pointer-events:none; user-select:none}
+/* ASSET: isolated vine / branch cuttings, transparent PNG */
+#hero .intrude{right:-42%; bottom:-20%; width:min(900px, 78vw); opacity:.95}
+
+/* ---------- about ---------- */
+#about{padding:var(--section) 0 0}
+.about-grid{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:clamp(30px,6vw,84px); align-items:start}
+.about-copy p:last-child{margin-bottom:0}
+
+.photo{
+  position:relative; background:#eceadf; border:1px solid var(--rule);
+  aspect-ratio:4/5; display:flex; align-items:center; justify-content:center;
+}
+.photo span{font-family:var(--condensed); font-size:14px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-leaf); text-align:center; padding:0 20px}
+.caption{margin-top:10px; font-family:var(--condensed); font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted-leaf)}
+
+.people{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(26px,5vw,64px); margin-top:clamp(52px,9vw,110px)}
+.person .name{font-family:var(--condensed); font-size:clamp(30px,4.6vw,48px); letter-spacing:.06em; text-transform:uppercase; line-height:1}
+.person .alias{font-family:var(--hand); font-size:clamp(17px,2vw,21px); color:var(--wine); margin-top:6px}
+.person .role{font-family:var(--condensed); font-size:15px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-leaf); margin-top:10px}
+
+/* the signature graphic: flowers growing out of the bone vessels.
+   Oversized and deliberately cropped by the viewport. */
+.signature{display:grid; grid-template-columns:minmax(0,7fr) minmax(0,4fr);
+  gap:clamp(20px,4vw,56px); align-items:end; margin:clamp(60px,11vw,150px) 0 0}
+/* ASSET: full bouquet growing from bone vessels. Bleeds past the container
+   on the left on purpose; body has overflow-x hidden. */
+.signature img{width:118%; max-width:none; margin-left:-14%}
+.signature .note{font-family:var(--hand); font-size:clamp(18px,2.2vw,24px); line-height:1.35;
+  padding-bottom:clamp(30px,7vw,90px)}
+
+/* ---------- music ---------- */
+#music{padding:var(--section) 0 0}
+.record{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(30px,6vw,80px); align-items:center}
+
+/* the album as an object, rebuilt from its own parts rather than a photo of it */
+.sleeve{
+  aspect-ratio:1/1; background:#fbfaf6; border:1px solid var(--rule);
+  box-shadow:0 18px 44px rgba(17,17,15,.10);
+  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+  padding:7% 8%; position:relative;
+}
+.sleeve .s-logo{width:92%}
+.sleeve .s-dog{width:68%; margin:2% 0}
+.sleeve .s-title{width:46%}
+.disc{width:min(300px,62%); margin:clamp(24px,4vw,40px) auto 0; transform:rotate(-3deg)}
+
+.tracks{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(26px,5vw,60px); margin-top:clamp(54px,9vw,110px)}
+.side-head{display:flex; align-items:flex-end; gap:12px; margin-bottom:18px}
+/* ASSET: little musician doodles lifted from the back sleeve */
+.side-head img{width:52px; flex:none}
+.side-head h3{font-family:var(--hand); font-size:clamp(24px,3.2vw,32px); margin:0}
+.tracks ol{list-style:none; margin:0; padding:0}
+.tracks li{font-family:var(--hand); font-size:clamp(19px,2.4vw,25px); line-height:1.55}
+.tracks .feat{display:block; font-family:var(--condensed); font-size:13px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted-leaf); line-height:1.5; margin-top:2px}
+
+.personnel{
+  margin-top:clamp(50px,8vw,96px); border-top:1px solid var(--ink); border-bottom:1px solid var(--ink);
+  padding:22px 0; font-family:var(--condensed); font-size:16px; letter-spacing:.11em;
+  text-transform:uppercase; line-height:2.05; columns:2; column-gap:clamp(24px,5vw,64px);
+}
+.personnel span{color:var(--muted-leaf)}
+
+/* ---------- tour ---------- */
+#tour{padding:var(--section) 0 0}
+.shows{border-top:1px solid var(--ink)}
+.show{
+  display:grid; grid-template-columns:120px minmax(0,1fr) auto;
+  gap:clamp(16px,4vw,48px); align-items:baseline;
+  padding:clamp(22px,3.4vw,34px) 0; border-bottom:1px solid var(--rule);
+  text-decoration:none;
+}
+.show:last-child{border-bottom-color:var(--ink)}
+.show .date{font-family:var(--condensed); font-size:clamp(28px,3.6vw,40px); letter-spacing:.05em; text-transform:uppercase; line-height:1}
+.show .city{font-family:var(--condensed); font-size:clamp(21px,2.6vw,28px); letter-spacing:.09em; text-transform:uppercase; line-height:1.15}
+.show .venue{display:block; font-family:var(--body); font-size:16px; letter-spacing:0; text-transform:none; color:var(--muted-leaf); margin-top:5px}
+.show .go{font-family:var(--condensed); font-size:15px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-leaf); white-space:nowrap}
+.show:hover .city{color:var(--accent-red)}
+.show:hover .go{color:var(--accent-red)}
+.tour-note{margin-top:clamp(28px,4vw,44px); font-family:var(--hand); font-size:clamp(18px,2.2vw,23px); max-width:34ch}
+
+/* ---------- road stories ---------- */
+#stories{padding:var(--section) 0 0}
+.entries{display:grid; gap:clamp(48px,8vw,100px)}
+.entry{display:grid; grid-template-columns:minmax(0,4fr) minmax(0,6fr); gap:clamp(24px,5vw,60px); align-items:start}
+.entry:nth-child(even) .shot{order:2}
+.entry .shot{background:#eceadf; border:1px solid var(--rule); aspect-ratio:5/4; display:flex; align-items:center; justify-content:center}
+.entry .shot span{font-family:var(--condensed); font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-leaf)}
+.entry .meta{font-family:var(--condensed); font-size:15px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-leaf); margin-bottom:10px}
+.entry h3{font-family:var(--hand); font-size:clamp(25px,3.6vw,38px); margin:0 0 .45em; max-width:18ch}
+.entry .more{font-family:var(--condensed); font-size:15px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border-bottom:1.5px solid var(--ink); padding-bottom:3px}
+.entry .more:hover{color:var(--accent-red); border-color:var(--accent-red)}
+
+/* ---------- merch ---------- */
+#merch{padding:var(--section) 0 0}
+.goods{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(24px,4vw,56px)}
+.good .shot{background:#eceadf; border:1px solid var(--rule); aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; margin-bottom:16px}
+.good .shot span{font-family:var(--condensed); font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-leaf); text-align:center; padding:0 16px}
+.good .pname{font-family:var(--condensed); font-size:clamp(21px,2.4vw,26px); letter-spacing:.09em; text-transform:uppercase; line-height:1.2}
+.good .price{font-family:var(--body); font-size:16px; color:var(--muted-leaf); margin-top:4px}
+.good .buy{display:inline-block; margin-top:12px; font-family:var(--condensed); font-size:14px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border-bottom:1.5px solid var(--ink); padding-bottom:2px}
+.good .buy:hover{color:var(--accent-red); border-color:var(--accent-red)}
+
+/* ---------- media ---------- */
+#media{padding:var(--section) 0 0}
+.panels{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--rule);
+  border:1px solid var(--rule)}
+.panel{background:var(--paper); padding:clamp(26px,3.4vw,40px) clamp(20px,2.4vw,30px); min-height:clamp(180px,20vw,240px);
+  display:flex; flex-direction:column; justify-content:space-between; text-decoration:none}
+.panel h3{font-family:var(--condensed); font-size:clamp(20px,2.4vw,26px); letter-spacing:.14em; text-transform:uppercase; margin:0 0 10px}
+.panel p{font-size:15.5px; color:var(--muted-leaf); margin:0}
+.panel .go{font-family:var(--condensed); font-size:14px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-leaf); margin-top:22px}
+.panel:hover h3{color:var(--accent-red)}
+
+/* ---------- footer ---------- */
+footer{padding:var(--section) 0 clamp(46px,7vw,80px); margin-top:var(--section); border-top:1px solid var(--rule); position:relative; overflow:hidden}
+.creed{display:flex; align-items:flex-start; gap:clamp(20px,4vw,54px)}
+/* ASSET: single bone / skull lifted from the Snake Piss centre label */
+.creed img{width:clamp(64px,8vw,104px); flex:none; margin-top:6px; opacity:.88}
+.creed p{font-family:var(--hand); font-size:clamp(26px,5.2vw,58px); line-height:1.22; margin:0; max-width:24ch}
+.foot-meta{display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px 40px; margin-top:clamp(54px,9vw,110px);
+  padding-top:22px; border-top:1px solid var(--rule)}
+.foot-meta a{text-decoration:none}
+.socials{display:flex; flex-wrap:wrap; gap:10px 18px}
+.socials a:hover{color:var(--accent-red)}
+
+/* ---------- section-transition flowers ---------- */
+.floret{display:block; margin:clamp(56px,9vw,120px) auto 0; width:clamp(90px,12vw,170px); opacity:.95}
+.floret.left{margin-left:0}
+.floret.right{margin-right:0; margin-left:auto}
+
+/* ---------- the page blooms on scroll ---------- */
+[data-bloom]{opacity:0; transform:translateY(16px); transition:opacity .9s cubic-bezier(.22,.7,.3,1), transform .9s cubic-bezier(.22,.7,.3,1)}
+[data-bloom].bloomed{opacity:1; transform:none}
+[data-bloom].art{transform:translateY(22px) rotate(-1.5deg)}
+[data-bloom].art.bloomed{transform:rotate(-1.5deg)}
+@media (prefers-reduced-motion:reduce){
+  [data-bloom],[data-bloom].art{opacity:1; transform:none; transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- mobile: built, not stacked ---------- */
+@media (max-width:860px){
+  .about-grid,.record,.entry{grid-template-columns:1fr}
+  .entry:nth-child(even) .shot{order:0}
+  .goods{grid-template-columns:1fr}
+  .panels{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .personnel{columns:1}
+  .people{gap:36px}
+}
+@media (max-width:700px){
+  nav{display:none}
+  nav.open{display:block; position:absolute; left:0; right:0; top:100%; background:var(--paper);
+    border-top:1px solid var(--rule); border-bottom:1px solid var(--ink)}
+  nav.open ul{flex-direction:column; gap:0; padding:8px var(--gutter) 18px}
+  nav.open a{padding:11px 0; font-size:22px; border:0}
+  .menu-btn{display:block}
+  header{position:sticky}
+  .bar .home{opacity:1}
+
+  #hero{min-height:calc(100svh - 62px)}
+  .logo{width:94vw}                 /* logo almost fills the width */
+  .birddog{width:46vw}
+  #hero .intrude{right:-58%; bottom:-6%; width:150vw; opacity:.9}
+  .hero-actions{gap:16px; flex-direction:column; align-items:center}
+
+  .signature{grid-template-columns:1fr; gap:14px; align-items:start}
+  .signature img{width:128%; margin-left:-14%}
+  .signature .note{padding-bottom:0}
+
+  .show{grid-template-columns:1fr; gap:6px; padding:22px 0}
+  .show .go{margin-top:6px}
+  .tracks{grid-template-columns:1fr; gap:38px}
+  .creed{flex-direction:column; gap:18px}
+  .floret{width:34vw}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ==================== COMPONENT: Header ==================== -->
+<header id="site-header">
+  <div class="wrap bar">
+    <a class="home" href="#hero">Blossomin' Bone</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#music">Music</a></li>
+        <li><a href="#tour">Tour</a></li>
+        <li><a href="#stories">Road Stories</a></li>
+        <li><a href="#merch">Merch</a></li>
+        <li><a href="#media">Media</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ==================== COMPONENT: Hero ==================== -->
+<section id="hero">
+  <!-- ASSET: the bouquet, run off the right edge so only a branch enters the frame.
+       Replace with a dedicated vine cutting once one is masked by hand. -->
+  <img class="intrude" src="/images/bouquet.webp" alt="" aria-hidden="true">
+  <div class="wrap hero-inner">
+    <!-- ASSET: BLOSSOMIN' BONE hand lettering, transparent PNG/SVG -->
+    <img class="logo" src="/images/logo.webp" alt="Blossomin' Bone" width="1280" height="163">
+    <p class="origin">Brantley County, Georgia</p>
+    <!-- ASSET: isolated Bird Dog drawing, transparent PNG -->
+    <img class="birddog" width="820" height="870" src="/images/birddog.webp" alt="The Bird Dog — a winged dog, drawn in ink">
+    <div class="hero-actions">
+      <a class="action" href="#music">Listen to Bird Dog</a>
+      <a class="action" href="#tour">Tour Dates ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COMPONENT: About ==================== -->
+<section id="about">
+  <div class="wrap">
+    <p class="opener label" data-bloom>About</p>
+
+    <div class="about-grid">
+      <div data-bloom>
+        <!-- PHOTO: band portrait, shot on the road. Vertical crop. -->
+        <div class="photo"><span>Band portrait<br>4:5</span></div>
+        <p class="caption">Ayron &amp; Bobby — photo needed</p>
+      </div>
+
+      <div class="about-copy" data-bloom>
+        <h2 class="hand">It all started on the sidewalk.</h2>
+        <p class="lede">Open a case, set an old coffee can down, and play until people quit walking. That is still most of what they do.</p>
+        <p>Ayron grew up out in Nahunta. She came to music late — Bobby taught her guitar after they met, and she was busking with the crew not long after. Bobby has wanted to be in a band since he was eleven, banging on his grandmother's upright lime-green piano. He writes close to a song a week and sends them to the group chat, lyrics and all.</p>
+        <p>They named an early record <em>State Line Schemers</em> after the habit that paid for it: setting up outside a gas station somewhere between Georgia and Florida and playing for gas money, whether or not they needed the gas. Eventually they quit their jobs and went out full time.</p>
+      </div>
+    </div>
+
+    <div class="people">
+      <div class="person" data-bloom>
+        <div class="name">Ayron Moleen</div>
+        <div class="role">Guitar / Vocals</div>
+      </div>
+      <div class="person" data-bloom>
+        <div class="name">Joshua Tison</div>
+        <div class="alias">“Hollering Bob”</div>
+        <div class="role">Stomp / Tam / Banjo / Vocals</div>
+      </div>
+    </div>
+
+    <!-- the band's name, drawn: flowers growing out of bone -->
+    <div class="signature">
+      <!-- ASSET: bouquet growing from the bone vessels, transparent PNG. Oversized on purpose. -->
+      <img src="/images/bouquet.webp" alt="A bouquet of hydrangeas, dahlias, honeysuckle and magnolia growing out of two bone vessels" data-bloom class="art" loading="lazy" decoding="async">
+      <p class="note" data-bloom>Flowers coming up out of bone. That's the whole idea, and they didn't have to explain it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COMPONENT: Music ==================== -->
+<section id="music">
+  <div class="wrap">
+    <p class="opener label" data-bloom>Music</p>
+
+    <div class="record">
+      <div data-bloom class="art">
+        <!-- The sleeve is assembled from its own parts so it stays crisp at any size.
+             Swap for a photograph of the physical record if you'd rather. -->
+        <div class="sleeve">
+          <img class="s-logo"  src="/images/logo.webp" alt="" loading="lazy" decoding="async">
+          <img class="s-dog"   src="/images/birddog.webp" alt="" loading="lazy" decoding="async">
+          <img class="s-title" src="/images/birddog-title.webp" alt="Bird Dog" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div data-bloom>
+        <h2 class="hand">Bird Dog</h2>
+        <p class="lede">Twelve songs about trains, heartache, couch-surfin' and campin' stories. Cut at Turkey Ridge Syndicate in Lulaton, Georgia.</p>
+        <p class="label" style="margin-bottom:26px">12" black vinyl · Snake Piss Records</p>
+        <div class="hero-actions" style="justify-content:flex-start; margin-top:0">
+          <a class="action" href="#">Listen</a>
+          <a class="action" href="#">Buy Vinyl</a>
+        </div>
+        <!-- ASSET: Snake Piss centre label, circular crop -->
+        <img class="disc" src="/images/record-label.webp" alt="The Snake Piss Records centre label" data-bloom loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <div class="tracks">
+      <div data-bloom>
+        <div class="side-head">
+          <!-- ASSET: guitar-playing dog doodle from the back sleeve -->
+          <img src="/images/doodle-guitar.webp" alt="" loading="lazy" decoding="async">
+          <h3>Side A</h3>
+        </div>
+        <ol>
+          <li>Boots Off</li>
+          <li>Wasted Youth</li>
+          <li>How Things End Up</li>
+          <li>Caroline</li>
+          <li>Tomorrow's Goodbye</li>
+          <li>Love Life</li>
+        </ol>
+      </div>
+      <div data-bloom>
+        <div class="side-head">
+          <!-- ASSET: banjo-playing dog doodle from the back sleeve -->
+          <img src="/images/doodle-banjo.webp" alt="" loading="lazy" decoding="async">
+          <h3>Side B</h3>
+        </div>
+        <ol>
+          <li>Raise Hell</li>
+          <li>Never Hear Your Name</li>
+          <li>Created to Be</li>
+          <li>Tell Ya Again</li>
+          <li>Dogs in Brantley</li>
+          <li>Down the Line <span class="feat">ft. “The Whistling Butcher” Nick Solomon</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="personnel" data-bloom>
+      Guitar / Vocals: <span>Ayron Moleen</span><br>
+      Stomp / Tam / Banjo / Vocals: <span>Joshua Tison aka “Hollering Bob”</span><br>
+      Washboard / Accordion / Vocals: <span>Amanda Syrinek</span><br>
+      Upright Bass / Vocals: <span>Holly Bassett</span><br>
+      Harmonica: <span>“The Whistling Butcher” Nick Solomon</span><br>
+      Recording / Mixing / Mastering: <span>Turkey Ridge Syndicate &amp; Ryan Stanley</span><br>
+      Album Artwork: <span>Goran Rister &amp; Taylin “Tater Mae” Dickerson</span><br>
+      Layout &amp; Design: <span>Sean Hanson</span>
+    </div>
+
+    <!-- ASSET: single isolated flower, section transition -->
+    <img class="floret right" src="/images/flower-white.webp" alt="" aria-hidden="true" data-bloom loading="lazy" decoding="async">
+  </div>
+</section>
+
+<!-- ==================== COMPONENT: Tour ==================== -->
+<section id="tour">
+  <div class="wrap">
+    <p class="opener label" data-bloom>Tour</p>
+
+    <!-- SHOWS: placeholder bill. Each row is one date. -->
+    <div class="shows" data-bloom>
+      <a class="show" href="#">
+        <span class="date">Oct 08</span>
+        <span class="city">Savannah, Georgia<span class="venue">Venue name</span></span>
+        <span class="go">Get Tickets →</span>
+      </a>
+      <a class="show" href="#">
+        <span class="date">Oct 17</span>
+        <span class="city">Brunswick, Georgia<span class="venue">Venue name</span></span>
+        <span class="go">Get Tickets →</span>
+      </a>
+      <a class="show" href="#">
+        <span class="date">Nov 02</span>
+        <span class="city">Jacksonville, Florida<span class="venue">Venue name</span></span>
+        <span class="go">Get Tickets →</span>
+      </a>
+    </div>
+
+    <p class="tour-note" data-bloom>Half of what we do never makes this list. Pier, gas station lot, somebody's porch.</p>
+
+    <img class="floret left" src="/images/flower-magnolia.webp" alt="" aria-hidden="true" data-bloom loading="lazy" decoding="async">
+  </div>
+</section>
+
+<!-- ==================== COMPONENT: RoadStories ==================== -->
+<section id="stories">
+  <div class="wrap">
+    <p class="opener label" data-bloom>Road Stories</p>
+
+    <div class="entries">
+      <article class="entry" data-bloom>
+        <div class="shot"><span>Roadside photo</span></div>
+        <div>
+          <p class="meta">Aug 14 · Waycross, Georgia</p>
+          <h3>Somewhere Between Brantley County and Hell</h3>
+          <p>Truck quit on us outside Waycross with the banjo and the suitcase kick still in the back. Played the parking lot for three hours waiting on a tow and made more than the show would've paid.</p>
+          <a class="more" href="#">Read it</a>
+        </div>
+      </article>
+
+      <article class="entry" data-bloom>
+        <div class="shot"><span>Roadside photo</span></div>
+        <div>
+          <p class="meta">Jul 02 · St. Simons Island, Georgia</p>
+          <h3>The Dog That Sat In On Two Songs</h3>
+          <p>Placeholder entry. Swap for something real — the pier, the crowd that gathered, whoever's dog it was.</p>
+          <a class="more" href="#">Read it</a>
+        </div>
+      </article>
+
+      <article class="entry" data-bloom>
+        <div class="shot"><span>Roadside photo</span></div>
+        <div>
+          <p class="meta">Jun 19 · Lulaton, Georgia</p>
+          <h3>Twelve Songs at Turkey Ridge</h3>
+          <p>Placeholder entry. Cutting the record — what the room sounded like, who brought what, how long it took.</p>
+          <a class="more" href="#">Read it</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- ASSET: bone from the centre label, appearing unannounced -->
+    <img class="floret right" src="/images/skull-cat.webp" alt="" aria-hidden="true" data-bloom loading="lazy" decoding="async">
+  </div>
+</section>
+
+<!-- ==================== COMPONENT: Merch ==================== -->
+<section id="merch">
+  <div class="wrap">
+    <p class="opener label" data-bloom>Merch</p>
+    <div class="goods">
+      <div class="good" data-bloom>
+        <div class="shot"><span>Product photo<br>Bird Dog LP</span></div>
+        <div class="pname">Bird Dog Vinyl</div>
+        <div class="price">$20</div>
+        <a class="buy" href="#">Buy</a>
+      </div>
+      <div class="good" data-bloom>
+        <div class="shot"><span>Product photo<br>Tee</span></div>
+        <div class="pname">Blossomin' Bone Tee</div>
+        <div class="price">$25</div>
+        <a class="buy" href="#">Buy</a>
+      </div>
+      <div class="good" data-bloom>
+        <div class="shot"><span>Product photo<br>Poster</span></div>
+        <div class="pname">Tour Poster</div>
+        <div class="price">$15</div>
+        <a class="buy" href="#">Buy</a>
+      </div>
+    </div>
+    <!-- ASSET: single isolated bloom, section transition -->
+    <img class="floret left" src="/images/flower-star.webp" alt="" aria-hidden="true" data-bloom loading="lazy" decoding="async">
+  </div>
+</section>
+
+<!-- ==================== COMPONENT: Media ==================== -->
+<section id="media">
+  <div class="wrap">
+    <p class="opener label" data-bloom>Media</p>
+    <div class="panels" data-bloom>
+      <a class="panel" href="#"><div><h3>Photos</h3><p>High resolution, free to use with a credit.</p></div><span class="go">Open →</span></a>
+      <a class="panel" href="#"><div><h3>Live Video</h3><p>Sidewalks, stages and parking lots.</p></div><span class="go">Watch →</span></a>
+      <a class="panel" href="#"><div><h3>Press</h3><p>Write-ups, interviews and the one-page bio.</p></div><span class="go">Read →</span></a>
+      <a class="panel" href="mailto:blossominbonebooking@gmail.com"><div><h3>Booking</h3><p>Bars, festivals, porches, weddings, pier benches.</p></div><span class="go">Email →</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== COMPONENT: Footer ==================== -->
+<footer>
+  <div class="wrap">
+    <div class="creed" data-bloom>
+      <!-- ASSET: ram skull from the Snake Piss centre label -->
+      <img src="/images/skull-ram.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <p class="hand">Don't give up on ya dreams.<br>Not once, not now, not ever.</p>
+    </div>
+    <div class="foot-meta">
+      <a class="label" href="https://www.snakepissrecords.com">Snake Piss Records</a>
+      <div class="socials label">
+        <a href="https://instagram.com/blossominbone">Instagram</a>
+        <a href="https://www.facebook.com/blossominbone/">Facebook</a>
+        <a href="https://www.youtube.com/channel/UCnC_he3u5koFnmwIjm3uGRw">YouTube</a>
+        <a href="https://open.spotify.com/artist/0q0f6cOnDvBnTg5KKAsTK8">Spotify</a>
+        <a href="mailto:blossominbonebooking@gmail.com">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* header hairline once you leave the hero */
+const header = document.getElementById('site-header');
+const onScroll = () => header.classList.toggle('stuck', window.scrollY > 40);
+onScroll();
+addEventListener('scroll', onScroll, {passive:true});
+
+/* mobile menu */
+const btn = document.getElementById('menu-btn');
+const nav = document.getElementById('site-nav');
+btn.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', String(open));
+  btn.textContent = open ? 'Close' : 'Menu';
+});
+nav.addEventListener('click', e => {
+  if (e.target.tagName === 'A') { nav.classList.remove('open'); btn.textContent = 'Menu'; btn.setAttribute('aria-expanded','false'); }
+});
+
+/* the page blooms as you go down it */
+const bloom = new IntersectionObserver((rows, obs) => {
+  rows.forEach(r => {
+    if (!r.isIntersecting) return;
+    r.target.classList.add('bloomed');
+    obs.unobserve(r.target);
+  });
+}, {rootMargin:'0px 0px -12% 0px', threshold:0.08});
+
+document.querySelectorAll('[data-bloom]').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 90 + 'ms';
+  bloom.observe(el);
+});
+</script>
+</body>
+</html>

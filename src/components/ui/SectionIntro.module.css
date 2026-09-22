@@ -1,0 +1,18 @@
+.opener {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 clamp(28px, 5vw, 54px);
+
+  font-family: var(--condensed);
+  font-size: 15px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted-leaf);
+}
+.opener::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}

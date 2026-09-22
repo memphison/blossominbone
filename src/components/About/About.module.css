@@ -1,0 +1,133 @@
+.about {
+  padding: var(--section) 0 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(30px, 6vw, 84px);
+  align-items: start;
+}
+
+.portrait {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  height: auto;
+}
+
+.caption {
+  margin: 10px 0 0;
+  font-family: var(--condensed);
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-leaf);
+}
+
+/* the reading measure lives on the prose container, never on `p` itself */
+.copy {
+  max-width: var(--measure);
+}
+.copy p {
+  margin: 0 0 1.15em;
+}
+.copy p:last-child {
+  margin-bottom: 0;
+}
+
+.heading {
+  font-family: var(--hand);
+  font-weight: 400;
+  line-height: 1.18;
+  font-size: clamp(34px, 6vw, 60px);
+  margin: 0 0 0.5em;
+  max-width: 16ch;
+}
+
+.lede {
+  font-size: clamp(19px, 2.2vw, 23px);
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.people {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(26px, 5vw, 64px);
+  margin-top: clamp(52px, 9vw, 110px);
+}
+.name {
+  font-family: var(--condensed);
+  font-size: clamp(30px, 4.6vw, 48px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.alias {
+  font-family: var(--hand);
+  font-size: clamp(17px, 2vw, 21px);
+  color: var(--wine);
+  margin-top: 6px;
+}
+.role {
+  font-family: var(--condensed);
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted-leaf);
+  margin-top: 10px;
+}
+
+/* ---------- the bouquet signature: bled left, note never on top of it ---------- */
+.signature {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(20px, 4vw, 56px);
+  align-items: end;
+  margin: clamp(60px, 11vw, 150px) 0 0;
+}
+
+/* Pull this column out to the true viewport edge by exactly the distance
+   from the edge to where .wrap's content normally starts (the gutter,
+   plus half of any space beyond --wrap-max), then widen by the same
+   amount so the right edge stays put. The overflow is cropped by the
+   viewport itself (body has overflow-x:hidden) — no guessed percentage,
+   no clipping box of our own. */
+.art {
+  --bleed: calc(var(--gutter) + max(0px, (100vw - var(--wrap-max)) / 2));
+  margin-left: calc(-1 * var(--bleed));
+  width: calc(100% + var(--bleed));
+}
+.artImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.note {
+  font-family: var(--hand);
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.35;
+  padding-bottom: clamp(30px, 7vw, 90px);
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .people {
+    gap: 36px;
+  }
+}
+
+@media (max-width: 700px) {
+  .signature {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .note {
+    padding-bottom: 0;
+  }
+}

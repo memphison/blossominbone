@@ -1,0 +1,76 @@
+.hero {
+  position: relative;
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  align-items: center;
+}
+
+.inner {
+  width: 100%;
+  text-align: center;
+  padding: clamp(30px, 7vh, 90px) 0 clamp(50px, 9vh, 110px);
+}
+
+.logo {
+  width: min(880px, 88vw);
+  height: auto;
+  margin: 0 auto;
+}
+
+.origin {
+  margin: clamp(16px, 2.4vw, 26px) 0 0;
+  font-family: var(--condensed);
+  font-size: clamp(17px, 2.2vw, 24px);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--muted-leaf);
+}
+
+.birddog {
+  width: min(330px, 52vw);
+  height: auto;
+  margin: clamp(26px, 5vh, 54px) auto 0;
+  transform: rotate(-1.2deg);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(18px, 4vw, 44px);
+  justify-content: center;
+  margin-top: clamp(34px, 6vh, 66px);
+}
+.action {
+  font-family: var(--condensed);
+  font-size: clamp(17px, 2vw, 21px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 5px;
+  border-bottom: 1.5px solid var(--ink);
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+.action:hover {
+  color: var(--accent-red);
+  border-bottom-color: var(--accent-red);
+}
+
+.signup {
+  margin: clamp(40px, 7vh, 76px) auto 0;
+}
+
+@media (max-width: 700px) {
+  .logo {
+    width: 94vw;
+  }
+  .birddog {
+    width: 46vw;
+  }
+  .actions {
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+  }
+}

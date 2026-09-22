@@ -1,0 +1,26 @@
+.bloom {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 0.7, 0.3, 1),
+    transform 0.9s cubic-bezier(0.22, 0.7, 0.3, 1);
+}
+.bloom.bloomed {
+  opacity: 1;
+  transform: none;
+}
+.bloom.art {
+  transform: translateY(22px) rotate(-1.5deg);
+}
+.bloom.art.bloomed {
+  transform: rotate(-1.5deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bloom,
+  .bloom.art {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

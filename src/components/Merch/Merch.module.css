@@ -1,0 +1,51 @@
+.merch {
+  padding: var(--section) 0 0;
+}
+
+.goods {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+}
+
+.shot {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.pname {
+  font-family: var(--condensed);
+  font-size: clamp(21px, 2.4vw, 26px);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.price {
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--muted-leaf);
+  margin-top: 4px;
+}
+.buy {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--condensed);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--ink);
+  padding-bottom: 2px;
+}
+.buy:hover {
+  color: var(--accent-red);
+  border-color: var(--accent-red);
+}
+
+@media (max-width: 860px) {
+  .goods {
+    grid-template-columns: 1fr;
+  }
+}
