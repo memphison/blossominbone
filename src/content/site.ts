@@ -28,9 +28,9 @@ export interface AboutContent {
   lede: string;
   paragraphs: string[];
   members: AboutMember[];
-  signatureNote: string;
   /** Omit to render the placeholder shot instead of a photo. */
   portrait?: AboutPhoto;
+  portraitCaption?: string;
 }
 
 export const BANDCAMP_URL = "https://blossominbone.bandcamp.com";
@@ -82,7 +82,16 @@ export const site = {
       { name: "Ayron Moleen", role: "Guitar / Vocals" },
       { name: "Joshua Tison", alias: '"Hollering Bob"', role: "Stomp / Tam / Banjo / Vocals" },
     ] satisfies AboutMember[],
-    signatureNote: "Flowers coming up out of bone. That's the whole idea, and they didn't have to explain it.",
+    // PLACEHOLDER — pulled from the band's own social media; photographer
+    // is unknown and uncredited. Do not let this go live until Ayron and
+    // Bobby confirm it's theirs to use, or send the original + credit.
+    portrait: {
+      src: "/images/band-photo.webp",
+      alt: "Ayron and Bobby playing guitar and banjo outside a bar at night",
+      width: 970,
+      height: 647,
+    },
+    portraitCaption: "Ayron & Bobby",
   } as AboutContent,
 
   tour: {

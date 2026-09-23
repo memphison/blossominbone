@@ -2,16 +2,17 @@
   padding: var(--section) 0 0;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: clamp(30px, 6vw, 84px);
-  align-items: start;
+/* The photo runs full width above the copy: a 3:2 landscape can't grow
+   tall enough to match a multi-paragraph text column without becoming
+   implausibly wide, so this avoids the mismatched-height side-by-side
+   that produced with the old 4:5 portrait crop. */
+.photoBlock {
+  margin-bottom: clamp(40px, 6vw, 64px);
 }
-
 .portrait {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 2;
   width: 100%;
+  max-width: 820px;
   height: auto;
 }
 
@@ -78,56 +79,20 @@
   margin-top: 10px;
 }
 
-/* ---------- the bouquet signature: bled left, note never on top of it ---------- */
+/* ---------- the bouquet signature: whole, centred, its silhouette doing the work ---------- */
 .signature {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-  gap: clamp(20px, 4vw, 56px);
-  align-items: end;
+  display: flex;
+  justify-content: center;
   margin: clamp(60px, 11vw, 150px) 0 0;
-}
-
-/* Pull this column out to the true viewport edge by exactly the distance
-   from the edge to where .wrap's content normally starts (the gutter,
-   plus half of any space beyond --wrap-max), then widen by the same
-   amount so the right edge stays put. The overflow is cropped by the
-   viewport itself (body has overflow-x:hidden) — no guessed percentage,
-   no clipping box of our own. */
-.art {
-  --bleed: calc(var(--gutter) + max(0px, (100vw - var(--wrap-max)) / 2));
-  margin-left: calc(-1 * var(--bleed));
-  width: calc(100% + var(--bleed));
 }
 .artImg {
   display: block;
-  width: 100%;
+  width: min(680px, 92%);
   height: auto;
 }
 
-.note {
-  font-family: var(--hand);
-  font-size: clamp(18px, 2.2vw, 24px);
-  line-height: 1.35;
-  padding-bottom: clamp(30px, 7vw, 90px);
-  margin: 0;
-}
-
 @media (max-width: 860px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
   .people {
     gap: 36px;
-  }
-}
-
-@media (max-width: 700px) {
-  .signature {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    align-items: start;
-  }
-  .note {
-    padding-bottom: 0;
   }
 }

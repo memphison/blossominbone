@@ -104,10 +104,20 @@ Open **`src/content/products.ts`**. Same idea:
 
 ## Swapping in a real photo
 
-Right now the band portrait, the three Road Stories photos, and the
-three product photos are all gray placeholder boxes — that's
-intentional until real photos are ready. Swapping one in takes two
-steps:
+The three Road Stories photos and the three product photos are all
+gray placeholder boxes — that's intentional until real photos are
+ready. Swapping one in takes two steps below.
+
+**⚠️ The band portrait is a placeholder that needs your OK before it
+can stay.** `band-photo.webp` (Ayron and Bobby playing outside a bar)
+was pulled from the band's own social media to get the layout right.
+The photographer is unknown and uncredited, and nobody has confirmed
+it's cleared to use on the site. **Do not let this go live** until
+Ayron and Bobby either confirm it's theirs to use, or send the
+original file and the photographer's name so they can be credited.
+Once that's settled, update `portraitCaption` in `src/content/site.ts`
+(currently just "Ayron & Bobby") to include the photographer credit if
+one is owed.
 
 **1. Add the photo file.**
 Drop the image into `public/images/` (any normal filename, e.g.
@@ -118,7 +128,9 @@ Windows, right-click the file → Properties → Details → look for
 **2. Point to it from the content file.**
 
 - **Band portrait** — open `src/content/site.ts`, find the `about`
-  section, and add a `portrait` field:
+  section, and update the `portrait` field (it's already set to the
+  placeholder photo — see the warning above). The layout expects a
+  landscape (wider-than-tall) photo, roughly 3:2:
 
   ```ts
   about: {
@@ -127,8 +139,9 @@ Windows, right-click the file → Properties → Details → look for
       src: "/images/ayron-and-bobby.jpg",
       alt: "Ayron and Bobby standing outside a gas station",
       width: 1200,
-      height: 1500,
+      height: 800,
     },
+    portraitCaption: "Ayron & Bobby",
   },
   ```
 
