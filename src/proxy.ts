@@ -19,7 +19,7 @@ async function makeSessionToken() {
     .join("");
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const isLoginPage = request.nextUrl.pathname === "/admin/login";
   const isLoginApi = request.nextUrl.pathname === "/api/admin/login";
 
