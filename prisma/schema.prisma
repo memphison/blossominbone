@@ -25,4 +25,6 @@ model TourDate {
   socialLink String?
   note       String?
   createdAt  DateTime @default(now())
+
+  @@unique([date, venue])
 }
