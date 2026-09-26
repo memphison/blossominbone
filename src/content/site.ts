@@ -30,7 +30,6 @@ export interface AboutContent {
   members: AboutMember[];
   /** Omit to render the placeholder shot instead of a photo. */
   portrait?: AboutPhoto;
-  portraitCaption?: string;
 }
 
 export const BANDCAMP_URL = "https://blossominbone.bandcamp.com";
@@ -80,7 +79,7 @@ export const site = {
     ],
     members: [
       { name: "Ayron Moleen", role: "Guitar / Vocals" },
-      { name: "Joshua Tison", alias: '"Hollering Bob"', role: "Stomp / Tam / Banjo / Vocals" },
+      { name: "Joshua Tison", alias: '"Hollerin\' Bob"', role: "Banjo / Vocals / Tam / Stomp" },
     ] satisfies AboutMember[],
     // PLACEHOLDER — pulled from the band's own social media; photographer
     // is unknown and uncredited. Do not let this go live until Ayron and
@@ -91,7 +90,6 @@ export const site = {
       width: 970,
       height: 647,
     },
-    portraitCaption: "Ayron & Bobby",
   } as AboutContent,
 
   tour: {

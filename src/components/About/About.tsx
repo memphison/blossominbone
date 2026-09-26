@@ -29,9 +29,16 @@ export default function About() {
             ) : (
               <Placeholder aspectRatio="3/2" label={"Band portrait\n3:2"} className={styles.portrait} />
             )}
-            {(about.portraitCaption || !about.portrait) && (
-              <p className={styles.caption}>{about.portraitCaption ?? "Ayron & Bobby — photo needed"}</p>
-            )}
+
+            <div className={styles.people}>
+              {about.members.map((member, i) => (
+                <Reveal key={member.name} delayMs={(i % 3) * 90}>
+                  <div className={styles.name}>{member.name}</div>
+                  {member.alias && <div className={styles.alias}>{member.alias}</div>}
+                  <div className={styles.role}>{member.role}</div>
+                </Reveal>
+              ))}
+            </div>
           </Reveal>
 
           <Reveal className={styles.copy}>
@@ -41,16 +48,6 @@ export default function About() {
               <p key={i}>{renderEmphasis(paragraph)}</p>
             ))}
           </Reveal>
-        </div>
-
-        <div className={styles.people}>
-          {about.members.map((member, i) => (
-            <Reveal key={member.name} delayMs={(i % 3) * 90}>
-              <div className={styles.name}>{member.name}</div>
-              {member.alias && <div className={styles.alias}>{member.alias}</div>}
-              <div className={styles.role}>{member.role}</div>
-            </Reveal>
-          ))}
         </div>
 
         {/* the band's name, drawn: flowers growing out of bone */}

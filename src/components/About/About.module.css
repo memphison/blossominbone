@@ -22,15 +22,6 @@
   height: auto;
 }
 
-.caption {
-  margin: 10px 0 0;
-  font-family: var(--condensed);
-  font-size: 14px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted-leaf);
-}
-
 /* the reading measure lives on the prose container, never on `p` itself */
 .copy {
   max-width: var(--measure);
@@ -57,15 +48,16 @@
   font-weight: 400;
 }
 
+/* the credit block: sits directly under the photo now, so it reads
+   like a caption rather than a separate section further down */
 .people {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(26px, 5vw, 64px);
-  margin-top: clamp(52px, 9vw, 110px);
+  gap: 18px;
+  margin-top: 18px;
 }
 .name {
   font-family: var(--condensed);
-  font-size: clamp(30px, 4.6vw, 48px);
+  font-size: clamp(22px, 3.2vw, 32px);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   line-height: 1;
@@ -97,18 +89,12 @@
   height: auto;
 }
 
-@media (max-width: 860px) {
-  .people {
-    gap: 36px;
-  }
-}
-
 @media (min-width: 1024px) {
   .intro {
     display: grid;
     grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
     gap: clamp(30px, 6vw, 84px);
-    align-items: center;
+    align-items: start;
   }
   .photoBlock {
     margin-bottom: 0;
