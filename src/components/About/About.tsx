@@ -15,31 +15,33 @@ export default function About() {
       <Container>
         <SectionIntro>About</SectionIntro>
 
-        <Reveal className={styles.photoBlock}>
-          {about.portrait ? (
-            <Image
-              src={about.portrait.src}
-              alt={about.portrait.alt}
-              width={about.portrait.width}
-              height={about.portrait.height}
-              className={styles.portrait}
-              loading="lazy"
-            />
-          ) : (
-            <Placeholder aspectRatio="3/2" label={"Band portrait\n3:2"} className={styles.portrait} />
-          )}
-          {(about.portraitCaption || !about.portrait) && (
-            <p className={styles.caption}>{about.portraitCaption ?? "Ayron & Bobby — photo needed"}</p>
-          )}
-        </Reveal>
+        <div className={styles.intro}>
+          <Reveal className={styles.photoBlock}>
+            {about.portrait ? (
+              <Image
+                src={about.portrait.src}
+                alt={about.portrait.alt}
+                width={about.portrait.width}
+                height={about.portrait.height}
+                className={styles.portrait}
+                loading="lazy"
+              />
+            ) : (
+              <Placeholder aspectRatio="3/2" label={"Band portrait\n3:2"} className={styles.portrait} />
+            )}
+            {(about.portraitCaption || !about.portrait) && (
+              <p className={styles.caption}>{about.portraitCaption ?? "Ayron & Bobby — photo needed"}</p>
+            )}
+          </Reveal>
 
-        <Reveal className={styles.copy}>
-          <h2 className={styles.heading}>{about.heading}</h2>
-          <p className={styles.lede}>{about.lede}</p>
-          {about.paragraphs.map((paragraph, i) => (
-            <p key={i}>{renderEmphasis(paragraph)}</p>
-          ))}
-        </Reveal>
+          <Reveal className={styles.copy}>
+            <h2 className={styles.heading}>{about.heading}</h2>
+            <p className={styles.lede}>{about.lede}</p>
+            {about.paragraphs.map((paragraph, i) => (
+              <p key={i}>{renderEmphasis(paragraph)}</p>
+            ))}
+          </Reveal>
+        </div>
 
         <div className={styles.people}>
           {about.members.map((member, i) => (

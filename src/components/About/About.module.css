@@ -2,10 +2,16 @@
   padding: var(--section) 0 0;
 }
 
-/* The photo runs full width above the copy: a 3:2 landscape can't grow
+/* Stacked by default (photo above copy) — a 3:2 landscape can't grow
    tall enough to match a multi-paragraph text column without becoming
-   implausibly wide, so this avoids the mismatched-height side-by-side
-   that produced with the old 4:5 portrait crop. */
+   implausibly wide, so below the 1024px breakpoint this avoids the
+   mismatched-height side-by-side that produced with the old 4:5 crop.
+   At ≥1024px there's enough width for a narrower photo column to sit
+   beside the copy without that mismatch reading as awkward — see the
+   media query below. */
+.intro {
+  display: block;
+}
 .photoBlock {
   margin-bottom: clamp(40px, 6vw, 64px);
 }
@@ -94,5 +100,20 @@
 @media (max-width: 860px) {
   .people {
     gap: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+    gap: clamp(30px, 6vw, 84px);
+    align-items: center;
+  }
+  .photoBlock {
+    margin-bottom: 0;
+  }
+  .portrait {
+    max-width: none;
   }
 }
