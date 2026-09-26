@@ -97,9 +97,17 @@
     align-items: start;
   }
   .photoBlock {
+    /* the hand-drawn heading font carries extra leading above its
+       cap-height, so a bare box-top alignment reads as the photo
+       sitting too high — nudged down to match the glyph top */
+    margin-top: 15px;
     margin-bottom: 0;
   }
   .portrait {
     max-width: none;
+  }
+  .people {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
   }
 }
