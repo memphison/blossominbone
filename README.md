@@ -34,35 +34,29 @@ marks in the same place, you can't break anything by editing text.
 
 ## Adding a tour date
 
-Open **`src/content/shows.ts`**.
+Tour dates are **not** edited as a file anymore — they live in a
+database, managed through a password-protected admin panel at
+`/admin` (e.g. `https://yoursite.com/admin`). Log in there and use
+"+ Add a tour date" to add one, or "Edit" / "Delete" on an existing
+one. No code changes, no deploy needed — it shows up on the public
+Tour section as soon as you save it (within about a minute).
 
-When there are no shows booked, the file looks like this:
+The Tour section only ever shows *upcoming* dates — anything before
+today quietly drops off the public page on its own but stays in the
+admin panel's "Show past shows" archive, so nothing needs to be
+deleted just because the show already happened.
 
-```ts
-export const shows: Show[] = [];
-```
+A few fields worth knowing when adding one:
 
-The Tour section shows an honest "nothing on the books right now"
-message instead of hiding itself when this list is empty. To add a
-show, put something between the brackets:
-
-```ts
-export const shows: Show[] = [
-  {
-    date: "2026-10-08",
-    city: "Savannah, Georgia",
-    venue: "The Wormhole",
-    ticketHref: "https://example.com/tickets",
-  },
-];
-```
-
-- `date` must be in `YYYY-MM-DD` format — it gets turned into "Oct 08"
-  automatically on the site.
-- Add a comma after each show's closing `}` if you're adding another
-  one below it.
-- `ticketHref` is the link the "Get Tickets" button opens. If you
-  don't have a link yet, leave it as `"#"`.
+- **Venue name** becomes a link if you fill in a **URL** (a ticket
+  page, venue site, etc.) or a **social link** (just the Instagram
+  handle, with or without the `@`). If both are filled in, the URL
+  wins.
+- **Note** renders as a small italic line under the venue — it's meant
+  for something like "with The Whistling Butcher", not a full
+  paragraph.
+- **City / State** are optional; leave them blank for a house show or
+  anywhere you'd rather not publish the exact location.
 
 ## Writing a Road Story
 
@@ -200,8 +194,17 @@ about that step, or see below if that's you).
 Standard Next.js app, App Router, TypeScript, no Tailwind (CSS Modules
 per component + `src/app/globals.css` for design tokens). `npm run
 build` produces a static-optimized production build. Deploys cleanly
-to Vercel with zero configuration — connect the repo and it just
-works. `next/image` handles photo optimization automatically.
+to Vercel — connect the repo, set the two environment variables below,
+and it works. `next/image` handles photo optimization automatically.
+
+The rest of the site is static content edited through the files in
+`src/content/`, but tour dates are the one piece backed by a real
+database (Postgres via Prisma — see `prisma/schema.prisma`) behind a
+small admin panel at `/admin`. The homepage revalidates every 60
+seconds (`export const revalidate = 60` in `src/app/page.tsx`) so a
+date added in the admin panel shows up on the public page without a
+redeploy — everything else on the page is unaffected by that and
+stays effectively static.
 
 **A note on this repo:** it currently lives under a personal GitHub
 account as a temporary home during development. It's intended to be
@@ -224,5 +227,14 @@ git push -u origin main
 
 **Connecting Vercel:** on vercel.com, "Add New… → Project", import the
 `blossominbone` GitHub repo, leave every build setting on its default
-(Next.js is auto-detected), and deploy. No environment variables are
-required for the current feature set.
+(Next.js is auto-detected), and deploy.
+
+**Environment variables** (set these in Vercel's Project Settings →
+Environment Variables, and in a local `.env` for development — see
+`.env` on this machine for the working values):
+
+- `DATABASE_URL` — the Postgres connection string the tour dates admin
+  panel and the public Tour section both read from.
+- `ADMIN_PASSWORD` — the password that gates `/admin` and any
+  non-`GET` request to `/api/tour-dates`. `GET` requests (what the
+  public Tour section uses) are open to anyone, by design.

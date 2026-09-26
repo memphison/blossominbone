@@ -8,6 +8,13 @@ import Merch from "@/components/Merch/Merch";
 import Media from "@/components/Media/Media";
 import Footer from "@/components/Footer/Footer";
 
+// The Tour section queries the database directly; without this the page
+// would be fully static and a new tour date added via /admin wouldn't
+// show up until the next deploy. Revalidating periodically keeps the
+// rest of the page's static/CDN-cached performance while still picking
+// up admin changes within a minute or so.
+export const revalidate = 60;
+
 export default function Home() {
   return (
     <>

@@ -7,52 +7,70 @@
 }
 .show {
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr) auto;
+  grid-template-columns: 160px minmax(0, 1fr);
   gap: clamp(16px, 4vw, 48px);
   align-items: baseline;
   padding: clamp(22px, 3.4vw, 34px) 0;
   border-bottom: 1px solid var(--rule);
-  text-decoration: none;
 }
 .show:last-child {
   border-bottom-color: var(--ink);
 }
+
+.dateCol {
+  display: flex;
+  flex-direction: column;
+}
 .date {
   font-family: var(--condensed);
-  font-size: clamp(28px, 3.6vw, 40px);
+  font-size: clamp(20px, 2.4vw, 26px);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.15;
 }
-.city {
+.time {
+  font-family: var(--body);
+  font-size: 14px;
+  color: var(--muted-leaf);
+  margin-top: 4px;
+}
+
+.venueName {
   font-family: var(--condensed);
   font-size: clamp(21px, 2.6vw, 28px);
   letter-spacing: 0.09em;
   text-transform: uppercase;
   line-height: 1.15;
+  text-decoration: none;
+  color: inherit;
 }
-.venue {
+a.venueName {
+  border-bottom: 1.5px solid transparent;
+  padding-bottom: 2px;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+a.venueName:hover {
+  color: var(--accent-red);
+  border-bottom-color: var(--accent-red);
+}
+
+.location {
   display: block;
   font-family: var(--body);
   font-size: 16px;
-  letter-spacing: 0;
-  text-transform: none;
   color: var(--muted-leaf);
   margin-top: 5px;
 }
-.go {
-  font-family: var(--condensed);
-  font-size: 15px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+
+.showNote {
+  display: block;
+  font-family: var(--body);
+  font-style: italic;
+  font-size: 14.5px;
   color: var(--muted-leaf);
-  white-space: nowrap;
-}
-.show:hover .city {
-  color: var(--accent-red);
-}
-.show:hover .go {
-  color: var(--accent-red);
+  margin-top: 6px;
 }
 
 .empty {
@@ -84,8 +102,5 @@
     grid-template-columns: 1fr;
     gap: 6px;
     padding: 22px 0;
-  }
-  .go {
-    margin-top: 6px;
   }
 }
