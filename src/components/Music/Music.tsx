@@ -51,6 +51,14 @@ export default function Music() {
             <Reveal>
               <h2 className={styles.heading}>{album.title}</h2>
               <p className={styles.lede}>{album.lede}</p>
+              <Image
+                src="/images/record-label.webp"
+                alt="The Snake Piss Records centre label"
+                width={1000}
+                height={1042}
+                className={styles.disc}
+                loading="lazy"
+              />
               <p className={styles.format}>{album.format}</p>
               <div className={styles.actions}>
                 <a className={styles.action} href={album.listenHref} {...externalLinkProps(album.listenHref)}>
@@ -60,16 +68,6 @@ export default function Music() {
                   Buy Vinyl
                 </a>
               </div>
-            </Reveal>
-            <Reveal>
-              <Image
-                src="/images/record-label.webp"
-                alt="The Snake Piss Records centre label"
-                width={1000}
-                height={1042}
-                className={styles.disc}
-                loading="lazy"
-              />
             </Reveal>
           </div>
         </div>

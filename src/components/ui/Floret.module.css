@@ -1,7 +1,11 @@
 .slotLeft,
 .slotRight {
   display: flex;
-  margin-top: clamp(56px, 9vw, 120px);
+  margin-top: clamp(28px, 4.5vw, 60px);
+  /* pulls the next section's own top padding (--section) up by half,
+     so the gap from floret to whatever follows isn't double-counted
+     as its own oversized whitespace on top of that rhythm */
+  margin-bottom: calc(var(--section) / -2);
 }
 .slotLeft {
   justify-content: flex-start;
@@ -11,7 +15,7 @@
 }
 
 .floret {
-  width: clamp(90px, 12vw, var(--floret-max, 170px));
+  width: clamp(58px, 7.8vw, var(--floret-max, 110px));
   opacity: 0.95;
 }
 .floret img {
@@ -21,6 +25,6 @@
 
 @media (max-width: 700px) {
   .floret {
-    width: min(34vw, var(--floret-max, 999px));
+    width: min(22vw, var(--floret-max, 999px));
   }
 }
