@@ -1,4 +1,11 @@
 import { NextResponse } from "next/server";
+import { createHmac } from "crypto";
+
+function makeSessionToken() {
+  return createHmac("sha256", process.env.SESSION_SECRET!)
+    .update(process.env.ADMIN_PASSWORD!)
+    .digest("hex");
+}
 
 export async function POST(request: Request) {
   const { password } = await request.json();
@@ -8,7 +15,7 @@ export async function POST(request: Request) {
   }
 
   const response = NextResponse.json({ success: true });
-  response.cookies.set("admin_session", process.env.ADMIN_PASSWORD!, {
+  response.cookies.set("admin_session", makeSessionToken(), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
