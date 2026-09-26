@@ -12,7 +12,7 @@
 }
 
 .logo {
-  width: min(880px, 88vw);
+  width: min(720px, 72vw);
   height: auto;
   margin: 0 auto;
 }
@@ -27,7 +27,7 @@
 }
 
 .birddog {
-  width: min(330px, 52vw);
+  width: min(400px, 63vw);
   height: auto;
   margin: clamp(26px, 5vh, 54px) auto 0;
   transform: rotate(-1.2deg);
@@ -63,10 +63,10 @@
 
 @media (max-width: 700px) {
   .logo {
-    width: 94vw;
+    width: 77vw;
   }
   .birddog {
-    width: 46vw;
+    width: 56vw;
   }
   .actions {
     gap: 16px;

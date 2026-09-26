@@ -15,7 +15,7 @@ export default function Hero() {
           width={1280}
           height={181}
           className={styles.logo}
-          sizes="(max-width: 700px) 94vw, 880px"
+          sizes="(max-width: 700px) 77vw, 720px"
           priority
         />
         <p className={styles.origin}>{site.origin}</p>
@@ -25,7 +25,7 @@ export default function Hero() {
           width={820}
           height={870}
           className={styles.birddog}
-          sizes="(max-width: 700px) 46vw, 330px"
+          sizes="(max-width: 700px) 56vw, 400px"
         />
         <div className={styles.actions}>
           <a className={styles.action} href={site.hero.listenHref} {...externalLinkProps(site.hero.listenHref)}>
