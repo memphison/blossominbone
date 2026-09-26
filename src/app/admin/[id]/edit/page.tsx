@@ -2,6 +2,21 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
+import { to12Hour, to24Hour } from "@/lib/timeFormat";
+
+interface TourDate {
+  id: number;
+  date: string;
+  time: string;
+  venue: string;
+  address: string | null;
+  city: string | null;
+  state: string | null;
+  zip: string | null;
+  url: string | null;
+  socialLink: string | null;
+  note: string | null;
+}
 
 export default function EditTourDatePage() {
   const router = useRouter();
@@ -30,11 +45,11 @@ export default function EditTourDatePage() {
     fetch("/api/tour-dates")
       .then((res) => res.json())
       .then((data) => {
-        const match = data.find((td: any) => String(td.id) === id);
+        const match = data.find((td: TourDate) => String(td.id) === id);
         if (match) {
           setForm({
             date: match.date ? match.date.slice(0, 10) : "",
-            time: match.time || "",
+            time: match.time ? to24Hour(match.time) : "",
             venue: match.venue || "",
             city: match.city || "",
             state: match.state || "",
@@ -70,7 +85,7 @@ export default function EditTourDatePage() {
     const res = await fetch(`/api/tour-dates/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, time: to12Hour(form.time) }),
     });
 
     setSaving(false);
@@ -117,8 +132,7 @@ export default function EditTourDatePage() {
 
         <label style={labelStyle}>Time *</label>
         <input
-          type="text"
-          placeholder="e.g. 7:00 PM"
+          type="time"
           value={form.time}
           onChange={(e) => update("time", e.target.value)}
           style={inputStyle}

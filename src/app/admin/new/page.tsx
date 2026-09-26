@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { to12Hour } from "@/lib/timeFormat";
 
 export default function NewTourDatePage() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function NewTourDatePage() {
     const res = await fetch("/api/tour-dates", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, time: to12Hour(form.time) }),
     });
 
     setSaving(false);
@@ -85,8 +86,7 @@ export default function NewTourDatePage() {
 
         <label style={labelStyle}>Time *</label>
         <input
-          type="text"
-          placeholder="e.g. 7:00 PM"
+          type="time"
           value={form.time}
           onChange={(e) => update("time", e.target.value)}
           style={inputStyle}
