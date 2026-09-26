@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+.vercel
+.env*
+
+# local AI-tool skill caches (vendored reference docs, not app code)
+/.agents
+/.claude
+/.windsurf
+skills-lock.json
